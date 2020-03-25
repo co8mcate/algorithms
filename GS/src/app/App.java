@@ -3,8 +3,9 @@ package app;
 import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
-//import java.util.HashMap;
+import java.util.Arrays;
 import java.util.List;
+import java.util.LinkedList;
 import java.util.Scanner;
 
 /*
@@ -35,26 +36,56 @@ public class App {
         System.out.println("\tStable Matching\n");
         System.out.println("================================\n");
 
-        String filePath = "input1.txt";
+        String filePath = "input2.txt";
 
         try {
 
             // Create an empty list for free men and women
-            List<List<Integer>> S = new ArrayList();
+            List<List<Integer>> freeMen = new ArrayList();
 
+            // Signal if the matching is stable or not
+            boolean flag = true;
+
+            // Create an Object for getting a file
             File myFile = new File(filePath);
             Scanner scan = new Scanner(myFile);
+
+            // Validate that you have a file
             System.out.println("Found your file!");
 
-            // Parse data and store in data structures - O(n)
+            // Parse data and store in data structures - O(1) for number of people
             int numOfPeople;
             numOfPeople = Integer.parseInt(scan.nextLine());
-            System.out.println("Number of both men and women: " + numOfPeople);
+            System.out.println("Number of people in a group of men or women: " + numOfPeople);
 
-            // while (scan.hasNext()) {
-            // Split the line into array using spaces as delimiter
+            // Parse data and store in data structures - O(n^2) for MEN
+            int menList[][] = new int[numOfPeople][numOfPeople];
+            for (int i = 0; i < numOfPeople; i++) {
+                for (int j = 0; j < numOfPeople; j++) {
+                    menList[i][j] = scan.nextInt();
+                }
+            }
 
-            // }
+            // Parse data and store in data structures - O(n^2) for WOMEN
+            int womenList[][] = new int[numOfPeople][numOfPeople];
+            for (int i = 0; i < numOfPeople; i++) {
+                for (int j = 0; j < numOfPeople; j++) {
+                    womenList[i][j] = scan.nextInt();
+                }
+            }
+
+            // Print men list for test
+            for (int[] row : menList) {
+                System.out.println(Arrays.toString(row));
+            }
+
+            System.out.println();
+
+            // Print women list for test
+            for (int[] row : womenList) {
+                System.out.println(Arrays.toString(row));
+            }
+
             scan.close();
         } catch (IOException e) {
             e.printStackTrace();
